@@ -132,6 +132,11 @@
         <!-- templates -->
         <internalFileTemplate name="Siddhi Main"/>
 
+        <!-- Tool Window for Single Event Simulation -->
+        <toolWindow id="Siddhi Single Event Simulation" anchor="right" secondary="true"
+                    icon="/icons/siddhi.png"
+                    factoryClass="org.wso2.siddhi.plugins.idea.singleeventsimulation.ui.SingleEventSimulationToolWindowFactory"/>
+
     </extensions>
 
     <actions>
