@@ -29,6 +29,9 @@ import org.wso2.siddhi.plugins.idea.runconfig.SiddhiRunningState;
 import org.wso2.siddhi.plugins.idea.util.SiddhiExecutor;
 import org.wso2.siddhi.plugins.idea.util.SiddhiHistoryProcessListener;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+
 /**
  * Defines siddhi application running state.
  */
@@ -67,6 +70,13 @@ public class SiddhiApplicationRunningState extends SiddhiRunningState<SiddhiAppl
         // If debugging mode is running, we need to add the debugging flag.
         if (isDebug()) {
             siddhiExecutor.withParameters("--siddhi.debug", String.valueOf(myDebugPort));
+        } else {
+            try (ServerSocket socket = new ServerSocket(0)) {
+                socket.setReuseAddress(true);
+                siddhiExecutor.withParameters("--siddhi.run", String.valueOf(socket.getLocalPort()));
+            } catch (IOException e) {
+                throw new IllegalStateException("Could not find a free TCP/IP port to start siddhi app");
+            }
         }
         siddhiExecutor.withParameters(inputFile);
         return siddhiExecutor;
