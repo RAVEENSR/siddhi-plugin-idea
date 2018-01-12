@@ -15,12 +15,14 @@
  */
 package org.wso2.siddhi.plugins.idea.singleeventsimulation.ui;
 
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import org.jetbrains.annotations.NotNull;
+import org.wso2.siddhi.plugins.idea.runconfig.SiddhiRunningState;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -51,5 +53,10 @@ public class SingleEventSimulationToolWindowFactory implements ToolWindowFactory
         Content content = contentFactory.createContent(myToolWindowContent, "", false);
         toolWindow.getContentManager().addContent(content);
 
+    }
+
+    public void implementation(){
+        ActionManager.getInstance();
+        //SiddhiRunningState;
     }
 }
